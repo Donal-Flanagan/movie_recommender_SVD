@@ -1,161 +1,97 @@
-# Movie Recommender System
+# Movie Recommender SVD
 
-A web application that recommends movies based on user preferences using Singular Value Decomposition (SVD).
+A movie recommendation system built with Flask and SVD (Singular Value Decomposition).
+
+## Overview
+
+This project implements a web-based movie recommendation system using the Netflix Prize dataset and the MovieLens dataset. It uses Singular Value Decomposition (SVD) to generate personalized movie recommendations for users based on their rating history.
 
 ## Features
 
 - User authentication and session management
-- Movie catalog browsing with filtering and search
-- Movie rating system
-- Personalized movie recommendations
-- Responsive and intuitive user interface
-
-## Technology Stack
-
-- **Frontend**: HTML, CSS, JavaScript, Bootstrap 4
-- **Backend**: Python, Flask
-- **Database**: MongoDB
-- **ML Library**: Surprise library for SVD implementation
-
-## System Requirements
-
-- Python 3.8+ (Python 3.12 recommended)
-- MongoDB 4.4+
-- Build tools:
-  - Linux: `build-essential` and `python3-dev` packages
-  - Windows: Microsoft Visual C++ Build Tools
-  - macOS: Xcode Command Line Tools
-
-## Project Structure
-
-```
-movie_recommender_SVD/
-├── .cursor/             # Cursor IDE rules
-├── .flaskenv            # Flask environment variables
-├── main.py              # Application entry point
-├── config.py            # Configuration settings
-├── application/         # Main application package
-│   ├── __init__.py      # Application factory
-│   ├── routes.py        # Route definitions
-│   ├── models.py        # Database models
-│   ├── forms.py         # Form definitions
-│   ├── static/          # Static files (CSS, JS, etc.)
-│   └── templates/       # Jinja2 templates
-├── models/              # Saved ML models
-├── utils/               # Utility functions
-└── docs/                # Documentation
-    ├── overview/        # Project overview
-    ├── backend/         # Backend documentation
-    ├── frontend/        # Frontend documentation
-    └── machine_learning/# ML documentation
-```
+- Movie catalog with search and filtering
+- User rating system
+- Personalized movie recommendations using SVD
+- Mobile-friendly responsive design
 
 ## Installation
 
-1. Install system dependencies:
-   
-   **Ubuntu/Debian:**
-   ```
-   sudo apt-get update
-   sudo apt-get install build-essential python3-dev
-   ```
-   
-   **Fedora/RHEL/CentOS:**
-   ```
-   sudo dnf install gcc gcc-c++ python3-devel
-   ```
-   
-   **Windows:**
-   - Install [Visual Studio Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
-   
-   **macOS:**
-   ```
-   xcode-select --install
-   ```
+### Prerequisites
 
-2. Clone the repository:
+- Python 3.8 or higher
+- MongoDB (optional, for database storage)
+
+### Setup
+
+1. Clone the repository:
    ```
    git clone https://github.com/yourusername/movie_recommender_SVD.git
    cd movie_recommender_SVD
    ```
 
-3. Create and activate a virtual environment:
+2. Create and activate a virtual environment:
    ```
-   python3 -m venv flaskenv
+   python -m venv flaskenv
    source flaskenv/bin/activate  # On Windows: flaskenv\Scripts\activate
    ```
 
-4. Install dependencies:
+3. Install dependencies:
    ```
    pip install -r requirements.txt
    ```
 
-5. Install scikit-surprise separately:
+4. Extract the data files:
    ```
-   pip install scikit-surprise
-   ```
-
-6. Set up MongoDB:
-   - Install MongoDB if not already installed
-   - Create a database named `movie_recommender`
-
-7. Configure environment variables:
-   - Create a `.env` file in the project root
-   - Add your MongoDB connection details and secret key
-
-8. Initialize the database:
-   ```
-   python init_db.py
+   python scripts/setup_data.py
    ```
 
-9. Run the application:
+5. Run the application:
    ```
    flask run
    ```
 
-## Usage
+6. Open your browser and navigate to `http://localhost:5000`
 
-1. Open your browser and navigate to `http://localhost:8081`
-2. Register or log in to your account
-3. Browse the movie catalog and rate movies
-4. View personalized recommendations based on your ratings
+## Data Sources
+
+This project uses the following datasets:
+
+- [MovieLens Small Dataset](https://grouplens.org/datasets/movielens/latest/) - Contains movie ratings and metadata
+- TMDB Metadata - Contains additional movie information like posters and cast/crew details
+
+The datasets are included as ZIP files in the repository and are extracted during setup.
+
+## Project Structure
+
+- `application/` - Main application package
+  - `__init__.py` - Application factory
+  - `routes.py` - Route definitions
+  - `models.py` - Database models
+  - `data_loader.py` - Data loading utilities
+  - `templates/` - HTML templates
+  - `static/` - Static assets (CSS, JS, images)
+- `data/` - Data directory (contains ZIP files)
+- `scripts/` - Utility scripts
+- `models/` - ML model storage
 
 ## Development
 
-This project is developed incrementally, following these stages:
+### Running Tests
 
-1. **Version 1**: Basic Flask application setup
-2. **Version 2**: Frontend templates and static assets
-3. **Version 3**: Data integration and template rendering
-4. **Version 4**: MongoDB database integration
-5. **Version 5**: User authentication and session management
-6. **Version 6**: SVD model integration and personalized recommendations
+```
+pytest
+```
 
-## Documentation
+### Code Style
 
-Comprehensive documentation is available in the `docs/` directory:
-
-- **Project Overview**: `docs/overview/project_overview.md`
-- **Backend Documentation**: `docs/backend/backend_documentation.md`
-- **Frontend Documentation**: `docs/frontend/frontend_documentation.md`
-- **Machine Learning Documentation**: `docs/machine_learning/ml_documentation.md`
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature-name`
-3. Commit your changes: `git commit -m 'Add some feature'`
-4. Push to the branch: `git push origin feature-name`
-5. Submit a pull request
+This project follows PEP 8 guidelines for Python code.
 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgements
+## Acknowledgments
 
-- [Surprise](https://surpriselib.com/) - A Python scikit for recommender systems
-- [Flask](https://flask.palletsprojects.com/) - The web framework used
-- [MongoDB](https://www.mongodb.com/) - The database platform
-- [MovieLens](https://grouplens.org/datasets/movielens/) - Dataset for movie recommendations
-- [Bootstrap](https://getbootstrap.com/) - Frontend component library 
+- [MovieLens](https://grouplens.org/datasets/movielens/) for providing the dataset
+- [Netflix Prize](https://www.kaggle.com/datasets/netflix-inc/netflix-prize-data) for the original competition dataset
+- [Surprise](https://surprise.readthedocs.io/) library for SVD implementation 
