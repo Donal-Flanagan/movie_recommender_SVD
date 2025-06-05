@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="50" viewBox="0 0 200 50">
+  <style>
+    .st0{fill:#007bff}
+    .st1{fill:#212529}
+    .st2{fill:#ffc107}
+    .st3{font-family:Arial, sans-serif;font-weight:bold}
+  </style>
+  
+  <!-- Film icon -->
+  <g transform="translate(10, 10)">
+    <rect class="st0" width="30" height="30" rx="4"/>
+    <path d="M5,5 v20 M10,5 v20 M20,5 v20 M25,5 v20" stroke="#fff" stroke-width="1.5"/>
+    <path d="M5,10 h20 M5,20 h20" stroke="#fff" stroke-width="1.5"/>
+  </g>
+  
+  <!-- Star icon -->
+  <g transform="translate(150, 10)">
+    <path class="st2" d="M15,0 L18.5,10.5 L30,10.5 L20.5,17 L24,28 L15,21.5 L6,28 L9.5,17 L0,10.5 L11.5,10.5 Z"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="50" y="30" class="st3" font-size="18" fill="#212529">Movie Recommender</text>
+</svg> 

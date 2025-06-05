@@ -22,7 +22,11 @@ def create_app():
             # For development only, generate a random key for this session
             # Note: This means sessions won't persist across server restarts
             app.logger.warning("No SECRET_KEY set, using randomly generated key for development")
-            app.config['SECRET_KEY'] = secrets.token_hex(16)
+            app.config['SECRET_KEY'] = secrets.token_hex(32)  # Increased from 16 to 32 bytes for more security
+
+    # Configure session
+    app.config['SESSION_TYPE'] = 'filesystem'
+    app.config['PERMANENT_SESSION_LIFETIME'] = 3600  # Session lifetime in seconds (1 hour)
 
     # Register blueprints
     from application.routes import main as main_blueprint

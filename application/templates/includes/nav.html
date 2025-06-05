@@ -11,22 +11,38 @@
                     <a class="nav-link {% if request.path == url_for('main.index') %}active{% endif %}" 
                        href="{{ url_for('main.index') }}">Home</a>
                 </li>
-                <!-- These routes will be implemented later -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Catalog</a>
+                    <a class="nav-link {% if request.path == url_for('main.catalog') %}active{% endif %}" 
+                       href="{{ url_for('main.catalog') }}">Catalog</a>
+                </li>
+                {% if session.get('user') %}
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == url_for('main.reviews') %}active{% endif %}" 
+                       href="{{ url_for('main.reviews') }}">My Ratings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Recommendations</a>
+                    <a class="nav-link {% if request.path == url_for('main.recommend') %}active{% endif %}" 
+                       href="{{ url_for('main.recommend') }}">Recommendations</a>
                 </li>
+                {% endif %}
             </ul>
             <ul class="navbar-nav">
-                <!-- Authentication links - will be implemented later -->
+                {% if session.get('user') %}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+                    <span class="nav-link text-light">Welcome, {{ session.user.name }}</span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.logout') }}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == url_for('main.login') %}active{% endif %}" 
+                       href="{{ url_for('main.login') }}">Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Register</a>
                 </li>
+                {% endif %}
             </ul>
         </div>
     </div>

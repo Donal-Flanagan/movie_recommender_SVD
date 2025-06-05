@@ -37,30 +37,30 @@
    - [x] 6.3. Create `templates/includes/nav.html` (navigation)
    - [x] 6.4. Create `templates/includes/footer.html` (footer)
 
-7. [ ] Create page templates
+7. [x] Create page templates
    - [x] 7.1. Create `templates/index.html` (home page)
-   - [ ] 7.2. Create `templates/catalog.html` (movie catalog)
-   - [ ] 7.3. Create `templates/login.html` (login page)
-   - [ ] 7.4. Create `templates/reviews.html` (user ratings)
-   - [ ] 7.5. Create `templates/recommend.html` (recommendations)
-   - [ ] 7.6. Create `templates/errors/404.html` (not found)
-   - [ ] 7.7. Create `templates/errors/500.html` (server error)
+   - [x] 7.2. Create `templates/catalog.html` (movie catalog)
+   - [x] 7.3. Create `templates/login.html` (login page)
+   - [x] 7.4. Create `templates/reviews.html` (user ratings)
+   - [x] 7.5. Create `templates/recommend.html` (recommendations)
+   - [x] 7.6. Create `templates/errors/404.html` (not found)
+   - [x] 7.7. Create `templates/errors/500.html` (server error)
 
-8. [ ] Add static assets
-   - [ ] 8.1. Add Bootstrap CSS/JS
-   - [ ] 8.2. Create `static/css/main.css` (global styles)
-   - [ ] 8.3. Create `static/css/custom_style.css` (custom styles)
-   - [ ] 8.4. Create `static/js/main.js` (global JavaScript)
-   - [ ] 8.5. Create `static/js/ratings.js` (rating functionality)
-   - [ ] 8.6. Add favicon and logo
+8. [x] Add static assets
+   - [x] 8.1. Add Bootstrap CSS/JS
+   - [x] 8.2. Create `static/css/main.css` (global styles)
+   - [x] 8.3. Create `static/css/custom_style.css` (custom styles)
+   - [x] 8.4. Create `static/js/main.js` (global JavaScript)
+   - [x] 8.5. Create `static/js/ratings.js` (rating functionality)
+   - [x] 8.6. Add favicon and logo
 
-9. [ ] Update routes to render templates
-   - [ ] 9.1. Update index route
-   - [ ] 9.2. Add catalog route
-   - [ ] 9.3. Add login route
-   - [ ] 9.4. Add reviews route
-   - [ ] 9.5. Add recommend route
-   - [ ] 9.6. Add error handlers
+9. [x] Update routes to render templates
+   - [x] 9.1. Update index route
+   - [x] 9.2. Add catalog route
+   - [x] 9.3. Add login route
+   - [x] 9.4. Add reviews route
+   - [x] 9.5. Add recommend route
+   - [x] 9.6. Add error handlers
 
 ## Phase 3: Data Integration (Version 3)
 

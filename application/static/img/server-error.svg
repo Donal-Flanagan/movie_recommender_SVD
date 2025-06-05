@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <style>
+    .st0{fill:#f8f9fa}
+    .st1{fill:#dc3545}
+    .st2{fill:#6c757d}
+    .st3{fill:#007bff}
+  </style>
+  <rect class="st0" width="400" height="300"/>
+  <g transform="translate(100, 50)">
+    <rect class="st3" x="60" y="40" width="80" height="120" rx="5"/>
+    <rect class="st2" x="70" y="60" width="60" height="10" rx="2"/>
+    <rect class="st2" x="70" y="80" width="60" height="10" rx="2"/>
+    <rect class="st2" x="70" y="100" width="60" height="10" rx="2"/>
+    <path class="st1" d="M170,100 L190,120 L170,140 M190,100 L170,120 L190,140" stroke-width="8" stroke-linecap="round" fill="none" stroke="#dc3545"/>
+    <path class="st2" d="M50,170 Q100,200 150,170 Q200,140 250,170"/>
+  </g>
+  <text x="200" y="250" text-anchor="middle" font-family="Arial" font-size="24" fill="#212529">Server Error</text>
+</svg> 

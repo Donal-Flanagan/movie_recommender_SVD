@@ -1,0 +1,118 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">Your Recommendations</h1>
+    
+    <div class="alert alert-info" role="alert">
+        <i class="bi bi-info-circle-fill me-2"></i>
+        Based on your ratings, we think you'll enjoy these movies!
+    </div>
+    
+    <ul class="nav nav-tabs mb-4" id="recommendationTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="personalized-tab" data-bs-toggle="tab" data-bs-target="#personalized" type="button" role="tab" aria-controls="personalized" aria-selected="true">Personalized</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="genre-tab" data-bs-toggle="tab" data-bs-target="#genre" type="button" role="tab" aria-controls="genre" aria-selected="false">By Genre</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="popular-tab" data-bs-toggle="tab" data-bs-target="#popular" type="button" role="tab" aria-controls="popular" aria-selected="false">Popular</button>
+        </li>
+    </ul>
+    
+    <div class="tab-content" id="recommendationTabsContent">
+        <div class="tab-pane fade show active" id="personalized" role="tabpanel" aria-labelledby="personalized-tab">
+            <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+                <!-- Personalized recommendations -->
+                {% if personalized %}
+                    {% for movie in personalized %}
+                    <div class="col">
+                        <div class="card h-100 movie-card">
+                            <div class="position-absolute top-0 end-0 m-2">
+                                <span class="badge bg-primary">{{ movie.match_percentage }}% Match</span>
+                            </div>
+                            <img src="https://via.placeholder.com/300x450?text={{ movie.movie_title|urlencode }}" class="card-img-top" alt="{{ movie.movie_title }} poster">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ movie.movie_title }}</h5>
+                                <p class="card-text"><small class="text-muted">{{ movie.movie_year }} | {{ movie.movie_genres|join(', ') }}</small></p>
+                                <p class="card-text">{{ movie.description }}</p>
+                            </div>
+                            <div class="card-footer bg-transparent border-top-0">
+                                <div class="d-flex justify-content-between">
+                                    <button class="btn btn-sm btn-outline-primary">Add to Watchlist</button>
+                                    <button class="btn btn-sm btn-outline-success" data-movie-id="{{ movie.movie_id }}">Rate</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-12 text-center py-5">
+                        <p class="text-muted">Rate more movies to get personalized recommendations.</p>
+                        <a href="{{ url_for('main.catalog') }}" class="btn btn-primary">Browse Movies</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="tab-pane fade" id="genre" role="tabpanel" aria-labelledby="genre-tab">
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <select class="form-select" aria-label="Select genre">
+                        <option selected>Select a genre</option>
+                        <option value="action">Action</option>
+                        <option value="comedy">Comedy</option>
+                        <option value="drama">Drama</option>
+                        <option value="sci-fi">Sci-Fi</option>
+                        <option value="thriller">Thriller</option>
+                    </select>
+                </div>
+            </div>
+            <div class="text-center py-5">
+                <p class="text-muted">Please select a genre to see recommendations.</p>
+            </div>
+        </div>
+        
+        <div class="tab-pane fade" id="popular" role="tabpanel" aria-labelledby="popular-tab">
+            <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+                <!-- Popular movie recommendations -->
+                {% if popular %}
+                    {% for movie in popular %}
+                    <div class="col">
+                        <div class="card h-100 movie-card">
+                            <div class="position-absolute top-0 end-0 m-2">
+                                <span class="badge bg-danger">Trending</span>
+                            </div>
+                            <img src="https://via.placeholder.com/300x450?text={{ movie.movie_title|urlencode }}" class="card-img-top" alt="{{ movie.movie_title }} poster">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ movie.movie_title }}</h5>
+                                <p class="card-text"><small class="text-muted">{{ movie.movie_year }} | {{ movie.movie_genres|join(', ') }}</small></p>
+                                <p class="card-text">{{ movie.description }}</p>
+                            </div>
+                            <div class="card-footer bg-transparent border-top-0">
+                                <div class="d-flex justify-content-between">
+                                    <button class="btn btn-sm btn-outline-primary">Add to Watchlist</button>
+                                    <button class="btn btn-sm btn-outline-success" data-movie-id="{{ movie.movie_id }}">Rate</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-12 text-center py-5">
+                        <p class="text-muted">No popular recommendations available at the moment.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="text-center mt-5">
+        <p class="text-muted">Recommendations are updated daily based on your ratings.</p>
+        <button class="btn btn-outline-primary">Refresh Recommendations</button>
+    </div>
+</div>
+{% endblock %}

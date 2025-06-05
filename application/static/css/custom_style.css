@@ -38,4 +38,136 @@
 .footer {
     background-color: var(--footer-bg) !important;
     padding: 1.5rem 0;
+}
+
+/*
+ * Custom styles for Movie Recommender
+ * Contains specific component styles and overrides
+ */
+
+/* Movie card styles */
+.movie-card {
+  border: none;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.movie-card .card-img-top {
+  transition: transform 0.3s ease;
+}
+
+.movie-card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+.movie-card .badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
+/* Rating component styles */
+.star-rating {
+  display: inline-flex;
+  align-items: center;
+}
+
+.star-rating .bi {
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0 2px;
+}
+
+.star-rating .bi:hover {
+  transform: scale(1.2);
+}
+
+/* Custom tab styling */
+.nav-tabs .nav-link {
+  font-weight: 500;
+  color: #495057;
+}
+
+.nav-tabs .nav-link.active {
+  color: #007bff;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+/* Custom button styles */
+.btn-outline-rating {
+  color: #ffc107;
+  border-color: #ffc107;
+}
+
+.btn-outline-rating:hover {
+  color: #212529;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+/* Hero section on homepage */
+.hero-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 5rem 0;
+  margin-bottom: 2rem;
+  border-radius: 0.5rem;
+}
+
+/* Custom form styling */
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+  color: #007bff;
+}
+
+.form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Custom table styling for reviews */
+.review-table img {
+  max-width: 60px;
+  border-radius: 4px;
+}
+
+.review-table .movie-title {
+  font-weight: 500;
+}
+
+/* Recommendation match indicator */
+.match-indicator {
+  height: 6px;
+  background-color: #e9ecef;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.match-indicator .match-fill {
+  height: 100%;
+  background-color: #28a745;
+}
+
+/* Custom alert styles */
+.alert-custom {
+  background-color: #f8f9fa;
+  border-left: 4px solid #007bff;
+  border-radius: 0;
+}
+
+/* Loading spinner */
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.spinner-border.text-primary {
+  width: 3rem;
+  height: 3rem;
 } 

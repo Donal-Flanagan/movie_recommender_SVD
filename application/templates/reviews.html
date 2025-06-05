@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">My Ratings</h1>
+    
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <p>You have rated <span class="fw-bold">{{ total_ratings }}</span> movies.</p>
+        </div>
+        <div class="col-md-6">
+            <div class="d-flex justify-content-md-end">
+                <select class="form-select w-auto me-2" aria-label="Sort by">
+                    <option selected>Sort by Date</option>
+                    <option value="rating-high">Rating (High to Low)</option>
+                    <option value="rating-low">Rating (Low to High)</option>
+                    <option value="title">Title (A-Z)</option>
+                </select>
+                <button class="btn btn-outline-primary" type="button">
+                    <i class="bi bi-download"></i> Export
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover review-table">
+            <thead>
+                <tr>
+                    <th scope="col">Movie</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Date Rated</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if ratings %}
+                    {% for rating in ratings %}
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="https://via.placeholder.com/50x75?text={{ rating.movie_title|urlencode }}" class="me-3" alt="{{ rating.movie_title }} poster thumbnail">
+                                <div>
+                                    <h6 class="mb-0 movie-title">{{ rating.movie_title }}</h6>
+                                    <small class="text-muted">{{ rating.movie_year if rating.movie_year else '1995' }} | {{ rating.movie_genres|join(', ') }}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating">
+                                {% set full_stars = rating.rating|int %}
+                                {% set half_star = (rating.rating - full_stars) >= 0.5 %}
+                                
+                                {% for i in range(full_stars) %}
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                {% endfor %}
+                                
+                                {% if half_star %}
+                                    <i class="bi bi-star-half text-warning"></i>
+                                    {% set remaining_stars = 4 - full_stars %}
+                                {% else %}
+                                    {% set remaining_stars = 5 - full_stars %}
+                                {% endif %}
+                                
+                                {% for i in range(remaining_stars) %}
+                                    <i class="bi bi-star text-warning"></i>
+                                {% endfor %}
+                                
+                                <span class="ms-1">{{ rating.rating }}/5</span>
+                            </div>
+                        </td>
+                        <td>{{ rating.date_rated.strftime('%b %d, %Y') }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-secondary me-1" data-movie-id="{{ rating.movie_id }}">Edit</button>
+                            <button class="btn btn-sm btn-outline-danger" data-movie-id="{{ rating.movie_id }}">Delete</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="text-center py-4">
+                            <p class="text-muted mb-0">You haven't rated any movies yet.</p>
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+    
+    {% if ratings and ratings|length >= 10 %}
+    <div class="text-center mt-4">
+        <p class="text-muted">Showing {{ ratings|length }} of {{ total_ratings }} ratings.</p>
+        <button class="btn btn-outline-primary">Load More</button>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

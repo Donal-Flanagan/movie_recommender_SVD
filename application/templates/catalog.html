@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">Movie Catalog</h1>
+    
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <form class="d-flex" role="search" method="get" action="{{ url_for('main.catalog') }}">
+                <input class="form-control me-2" type="search" name="search" placeholder="Search movies..." aria-label="Search" value="{{ search_query or '' }}">
+                <button class="btn btn-outline-primary" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div class="d-flex justify-content-md-end">
+                <select class="form-select w-auto" aria-label="Filter by genre" name="genre" onchange="this.form.submit()">
+                    <option value="" {% if not selected_genre %}selected{% endif %}>All Genres</option>
+                    <option value="action" {% if selected_genre == 'action' %}selected{% endif %}>Action</option>
+                    <option value="comedy" {% if selected_genre == 'comedy' %}selected{% endif %}>Comedy</option>
+                    <option value="drama" {% if selected_genre == 'drama' %}selected{% endif %}>Drama</option>
+                    <option value="sci-fi" {% if selected_genre == 'sci-fi' %}selected{% endif %}>Sci-Fi</option>
+                    <option value="thriller" {% if selected_genre == 'thriller' %}selected{% endif %}>Thriller</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4" id="movie-container">
+        <!-- Movie cards -->
+        {% for movie in movies %}
+        <div class="col">
+            <div class="card h-100 movie-card">
+                <img src="https://via.placeholder.com/300x450?text={{ movie.title|urlencode }}" class="card-img-top" alt="{{ movie.title }} poster">
+                <div class="card-body">
+                    <h5 class="card-title">{{ movie.title }}</h5>
+                    <p class="card-text"><small class="text-muted">{{ movie.year }} | {{ movie.genres|join(', ') }}</small></p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="rating">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <span>{{ movie.avg_rating }}/5</span>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary" data-movie-id="{{ movie.movie_id }}">Rate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        
+        {% if not movies %}
+        <div class="col-12 text-center py-5">
+            <p class="text-muted">No movies found matching your criteria.</p>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if pagination and pagination.total_pages > 1 %}
+    <nav aria-label="Page navigation" class="mt-5">
+        <ul class="pagination justify-content-center">
+            <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for('main.catalog', page=pagination.current_page-1, genre=selected_genre, search=search_query) if pagination.has_prev else '#' }}" {% if not pagination.has_prev %}tabindex="-1" aria-disabled="true"{% endif %}>Previous</a>
+            </li>
+            
+            {% for p in range(1, pagination.total_pages + 1) %}
+            <li class="page-item {% if p == pagination.current_page %}active{% endif %}">
+                <a class="page-link" href="{{ url_for('main.catalog', page=p, genre=selected_genre, search=search_query) }}">{{ p }}</a>
+            </li>
+            {% endfor %}
+            
+            <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for('main.catalog', page=pagination.current_page+1, genre=selected_genre, search=search_query) if pagination.has_next else '#' }}">Next</a>
+            </li>
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+{% endblock %}
