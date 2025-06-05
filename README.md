@@ -17,6 +17,15 @@ A web application that recommends movies based on user preferences using Singula
 - **Database**: MongoDB
 - **ML Library**: Surprise library for SVD implementation
 
+## System Requirements
+
+- Python 3.8+ (Python 3.12 recommended)
+- MongoDB 4.4+
+- Build tools:
+  - Linux: `build-essential` and `python3-dev` packages
+  - Windows: Microsoft Visual C++ Build Tools
+  - macOS: Xcode Command Line Tools
+
 ## Project Structure
 
 ```
@@ -43,37 +52,63 @@ movie_recommender_SVD/
 
 ## Installation
 
-1. Clone the repository:
+1. Install system dependencies:
+   
+   **Ubuntu/Debian:**
+   ```
+   sudo apt-get update
+   sudo apt-get install build-essential python3-dev
+   ```
+   
+   **Fedora/RHEL/CentOS:**
+   ```
+   sudo dnf install gcc gcc-c++ python3-devel
+   ```
+   
+   **Windows:**
+   - Install [Visual Studio Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
+   
+   **macOS:**
+   ```
+   xcode-select --install
+   ```
+
+2. Clone the repository:
    ```
    git clone https://github.com/yourusername/movie_recommender_SVD.git
    cd movie_recommender_SVD
    ```
 
-2. Create and activate a virtual environment:
+3. Create and activate a virtual environment:
    ```
    python3 -m venv flaskenv
    source flaskenv/bin/activate  # On Windows: flaskenv\Scripts\activate
    ```
 
-3. Install dependencies:
+4. Install dependencies:
    ```
    pip install -r requirements.txt
    ```
 
-4. Set up MongoDB:
+5. Install scikit-surprise separately:
+   ```
+   pip install scikit-surprise
+   ```
+
+6. Set up MongoDB:
    - Install MongoDB if not already installed
    - Create a database named `movie_recommender`
 
-5. Configure environment variables:
+7. Configure environment variables:
    - Create a `.env` file in the project root
    - Add your MongoDB connection details and secret key
 
-6. Initialize the database:
+8. Initialize the database:
    ```
    python init_db.py
    ```
 
-7. Run the application:
+9. Run the application:
    ```
    flask run
    ```
