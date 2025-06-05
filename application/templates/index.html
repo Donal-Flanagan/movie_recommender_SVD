@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ title }} - Movie Recommender
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome to Movie Recommender</h1>
+        <p class="lead">Discover new movies based on your preferences using our advanced recommendation system.</p>
+        <hr class="my-4">
+        <p>Get personalized movie recommendations based on your ratings and viewing history.</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Browse Movies</a>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Browse Catalog</h5>
+                    <p class="card-text">Explore our extensive movie catalog with detailed information.</p>
+                    <a href="#" class="btn btn-outline-primary">View Catalog</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Rate Movies</h5>
+                    <p class="card-text">Rate movies you've watched to improve your recommendations.</p>
+                    <a href="#" class="btn btn-outline-primary">Rate Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Get Recommendations</h5>
+                    <p class="card-text">Receive personalized movie recommendations.</p>
+                    <a href="#" class="btn btn-outline-primary">See Recommendations</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %} 
