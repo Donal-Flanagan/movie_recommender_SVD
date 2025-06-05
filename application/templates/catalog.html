@@ -35,7 +35,12 @@
                 <img src="https://via.placeholder.com/300x450?text={{ movie.title|urlencode }}" class="card-img-top" alt="{{ movie.title }} poster">
                 <div class="card-body">
                     <h5 class="card-title">{{ movie.title }}</h5>
-                    <p class="card-text"><small class="text-muted">{{ movie.year }} | {{ movie.genres|join(', ') }}</small></p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            {% if movie.year %}{{ movie.year }}{% endif %}
+                            {% if movie.genres %}| {{ movie.genres|join(', ') }}{% endif %}
+                        </small>
+                    </p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="rating">
                             <i class="bi bi-star-fill text-warning"></i>

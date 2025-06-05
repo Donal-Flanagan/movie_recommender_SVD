@@ -9,31 +9,33 @@ def inject_now():
     """Add current year to all templates."""
     return {'now': datetime.now(UTC)}
 
+# =====================================================================
+# TEMPORARY DUMMY DATA
+# This data will be replaced with SQLite database queries in Phase 4
+# =====================================================================
+
 # Dummy data for a specific user (user_id: 1132304)
-# This follows the format from the guide
+# This follows the format from the guide and Netflix Prize dataset
 ratings_ = [
     {
-        "user_id": "1132304",
-        "movie_id": "1",
-        "movie_title": "Toy Story",
-        "movie_genres": ["Adventure", "Animation", "Children", "Comedy", "Fantasy"],
-        "rating": 5.0,
+        "user_id": "1132304", 
+        "movie_id": "1", 
+        "movie_title": "Toy Story", 
+        "rating": 5.0, 
         "timestamp": 964982703
     },
     {
-        "user_id": "1132304",
-        "movie_id": "780",
-        "movie_title": "Independence Day",
-        "movie_genres": ["Action", "Adventure", "Sci-Fi", "Thriller"],
-        "rating": 4.0,
+        "user_id": "1132304", 
+        "movie_id": "780", 
+        "movie_title": "Independence Day", 
+        "rating": 4.0, 
         "timestamp": 964981247
     },
     {
-        "user_id": "1132304",
-        "movie_id": "590",
-        "movie_title": "Dances with Wolves",
-        "movie_genres": ["Adventure", "Drama", "Western"],
-        "rating": 4.0,
+        "user_id": "1132304", 
+        "movie_id": "590", 
+        "movie_title": "Dances with Wolves", 
+        "rating": 4.0, 
         "timestamp": 964982224
     }
 ]
@@ -41,28 +43,22 @@ ratings_ = [
 # Dummy recommendation data
 preds_ = [
     {
-        "user_id": "1132304",
-        "movie_id": "589",
-        "movie_title": "Terminator 2: Judgment Day",
-        "movie_genres": ["Action", "Sci-Fi", "Thriller"],
-        "est_rating": 4.95,
-        "match_percentage": 99
+        "user_id": "1132304", 
+        "movie_id": "589", 
+        "movie_title": "Terminator 2: Judgment Day", 
+        "est_rating": 4.95
     },
     {
-        "user_id": "1132304",
-        "movie_id": "1240",
-        "movie_title": "Terminator, The",
-        "movie_genres": ["Action", "Sci-Fi", "Thriller"],
-        "est_rating": 4.89,
-        "match_percentage": 98
+        "user_id": "1132304", 
+        "movie_id": "1240", 
+        "movie_title": "Terminator, The", 
+        "est_rating": 4.89
     },
     {
-        "user_id": "1132304",
-        "movie_id": "1196",
-        "movie_title": "Star Wars: Episode V - The Empire Strikes Back",
-        "movie_genres": ["Action", "Adventure", "Drama", "Sci-Fi", "War"],
-        "est_rating": 4.88,
-        "match_percentage": 98
+        "user_id": "1132304", 
+        "movie_id": "1196", 
+        "movie_title": "Star Wars: Episode V - The Empire Strikes Back", 
+        "est_rating": 4.88
     }
 ]
 
@@ -70,40 +66,39 @@ preds_ = [
 movies_ = [
     {
         "movie_id": "1",
-        "title": "Toy Story",
-        "genres": ["Adventure", "Animation", "Children", "Comedy", "Fantasy"],
-        "year": 1995,
-        "avg_rating": 4.15
+        "title": "Toy Story"
     },
     {
         "movie_id": "2",
-        "title": "Jumanji",
-        "genres": ["Adventure", "Children", "Fantasy"],
-        "year": 1995,
-        "avg_rating": 3.75
+        "title": "Jumanji"
     },
     {
         "movie_id": "3",
-        "title": "Grumpier Old Men",
-        "genres": ["Comedy", "Romance"],
-        "year": 1995,
-        "avg_rating": 3.22
+        "title": "Grumpier Old Men"
     },
     {
         "movie_id": "4",
-        "title": "Waiting to Exhale",
-        "genres": ["Comedy", "Drama", "Romance"],
-        "year": 1995,
-        "avg_rating": 2.88
+        "title": "Waiting to Exhale"
     },
     {
         "movie_id": "5",
-        "title": "Father of the Bride Part II",
-        "genres": ["Comedy"],
-        "year": 1995,
-        "avg_rating": 3.05
+        "title": "Father of the Bride Part II"
     }
 ]
+
+# Additional movie information (this would typically come from a separate dataset)
+# This is used to enhance the display but isn't part of the core Netflix dataset
+movie_info = {
+    "1": {"year": 1995, "genres": ["Animation", "Children", "Comedy"]},
+    "2": {"year": 1995, "genres": ["Adventure", "Children", "Fantasy"]},
+    "3": {"year": 1995, "genres": ["Comedy", "Romance"]},
+    "4": {"year": 1995, "genres": ["Comedy", "Drama"]},
+    "5": {"year": 1995, "genres": ["Comedy"]}
+}
+
+# =====================================================================
+# END OF TEMPORARY DUMMY DATA
+# =====================================================================
 
 @main.route('/')
 def index():
@@ -118,16 +113,33 @@ def catalog():
     genre = request.args.get('genre', None)
     search = request.args.get('search', None)
     
-    # Use the dummy movie data
-    movies = movies_
+    # TODO: Replace with SQLite database queries in Phase 4
+    # Use the dummy movie data and enhance with additional info
+    movies = []
+    for movie in movies_:
+        movie_id = movie["movie_id"]
+        enhanced_movie = {
+            "movie_id": movie_id,
+            "title": movie["title"]
+        }
+        
+        # Add additional info if available
+        if movie_id in movie_info:
+            enhanced_movie["year"] = movie_info[movie_id]["year"]
+            enhanced_movie["genres"] = movie_info[movie_id]["genres"]
+        
+        # Calculate average rating (in a real app, this would come from the database)
+        enhanced_movie["avg_rating"] = 3.5  # Default placeholder
+        
+        movies.append(enhanced_movie)
     
     # Filter by genre if specified
     if genre:
-        movies = [m for m in movies if genre.lower() in [g.lower() for g in m['genres']]]
+        movies = [m for m in movies if "genres" in m and genre.lower() in [g.lower() for g in m["genres"]]]
     
     # Filter by search term if specified
     if search:
-        movies = [m for m in movies if search.lower() in m['title'].lower()]
+        movies = [m for m in movies if search.lower() in m["title"].lower()]
     
     # Pagination data
     pagination = {
@@ -152,6 +164,7 @@ def login():
         password = request.form.get('password')
         remember = 'remember' in request.form
         
+        # TODO: Replace with proper authentication in Phase 6
         # Simple login logic (to be replaced with actual authentication)
         if email == "user@example.com" and password == "password":
             # Set user in session
@@ -185,12 +198,19 @@ def reviews():
     # Get user_id from session
     user_id = session['user']['user_id']
     
+    # TODO: Replace with SQLite database queries in Phase 4
     # Filter ratings for the logged-in user
     user_ratings = [r for r in ratings_ if r['user_id'] == user_id]
     
     # Convert timestamp to datetime for display
     for rating in user_ratings:
         rating['date_rated'] = datetime.fromtimestamp(rating['timestamp'], UTC)
+        
+        # Add additional movie info for display purposes
+        movie_id = rating['movie_id']
+        if movie_id in movie_info:
+            rating['movie_year'] = movie_info[movie_id]['year']
+            rating['movie_genres'] = movie_info[movie_id]['genres']
     
     return render_template('reviews.html', 
                           title='My Ratings',
@@ -208,20 +228,29 @@ def recommend():
     # Get user_id from session
     user_id = session['user']['user_id']
     
+    # TODO: Replace with SQLite database queries and SVD model in Phase 7
     # Filter recommendations for the logged-in user
     user_recommendations = [p for p in preds_ if p['user_id'] == user_id]
     
     # Prepare data for the template
     personalized_recommendations = []
     for rec in user_recommendations:
-        personalized_recommendations.append({
-            'movie_id': rec['movie_id'],
+        movie_id = rec['movie_id']
+        recommendation = {
+            'movie_id': movie_id,
             'movie_title': rec['movie_title'],
-            'movie_year': 1995,  # Placeholder, would come from movie metadata
-            'movie_genres': rec['movie_genres'],
-            'match_percentage': rec['match_percentage'],
-            'description': f"A recommended movie based on your rating patterns. Estimated rating: {rec['est_rating']}/5."
-        })
+            'match_percentage': int(rec['est_rating'] * 20)  # Convert 5-star rating to percentage
+        }
+        
+        # Add additional movie info for display purposes
+        if movie_id in movie_info:
+            recommendation['movie_year'] = movie_info[movie_id]['year'] if movie_id in movie_info else 1995
+            recommendation['movie_genres'] = movie_info[movie_id]['genres'] if movie_id in movie_info else []
+        
+        # Add a description (this would come from a separate dataset in a real app)
+        recommendation['description'] = f"Recommended based on your ratings. Estimated rating: {rec['est_rating']}/5."
+        
+        personalized_recommendations.append(recommendation)
     
     # Dummy popular recommendations
     popular_recommendations = [
@@ -229,7 +258,7 @@ def recommend():
             'movie_id': '356',
             'movie_title': 'Forrest Gump',
             'movie_year': 1994,
-            'movie_genres': ['Comedy', 'Drama', 'Romance', 'War'],
+            'movie_genres': ['Comedy', 'Drama', 'Romance'],
             'rating': 4.5,
             'description': 'The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man with an IQ of 75.'
         }

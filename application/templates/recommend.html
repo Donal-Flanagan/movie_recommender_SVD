@@ -37,7 +37,12 @@
                             <img src="https://via.placeholder.com/300x450?text={{ movie.movie_title|urlencode }}" class="card-img-top" alt="{{ movie.movie_title }} poster">
                             <div class="card-body">
                                 <h5 class="card-title">{{ movie.movie_title }}</h5>
-                                <p class="card-text"><small class="text-muted">{{ movie.movie_year }} | {{ movie.movie_genres|join(', ') }}</small></p>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        {% if movie.movie_year %}{{ movie.movie_year }}{% endif %}
+                                        {% if movie.movie_genres %}| {{ movie.movie_genres|join(', ') }}{% endif %}
+                                    </small>
+                                </p>
                                 <p class="card-text">{{ movie.description }}</p>
                             </div>
                             <div class="card-footer bg-transparent border-top-0">
@@ -89,7 +94,12 @@
                             <img src="https://via.placeholder.com/300x450?text={{ movie.movie_title|urlencode }}" class="card-img-top" alt="{{ movie.movie_title }} poster">
                             <div class="card-body">
                                 <h5 class="card-title">{{ movie.movie_title }}</h5>
-                                <p class="card-text"><small class="text-muted">{{ movie.movie_year }} | {{ movie.movie_genres|join(', ') }}</small></p>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        {% if movie.movie_year %}{{ movie.movie_year }}{% endif %}
+                                        {% if movie.movie_genres %}| {{ movie.movie_genres|join(', ') }}{% endif %}
+                                    </small>
+                                </p>
                                 <p class="card-text">{{ movie.description }}</p>
                             </div>
                             <div class="card-footer bg-transparent border-top-0">

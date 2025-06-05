@@ -44,7 +44,10 @@
                                 <img src="https://via.placeholder.com/50x75?text={{ rating.movie_title|urlencode }}" class="me-3" alt="{{ rating.movie_title }} poster thumbnail">
                                 <div>
                                     <h6 class="mb-0 movie-title">{{ rating.movie_title }}</h6>
-                                    <small class="text-muted">{{ rating.movie_year if rating.movie_year else '1995' }} | {{ rating.movie_genres|join(', ') }}</small>
+                                    <small class="text-muted">
+                                        {% if rating.movie_year %}{{ rating.movie_year }}{% endif %}
+                                        {% if rating.movie_genres %}| {{ rating.movie_genres|join(', ') }}{% endif %}
+                                    </small>
                                 </div>
                             </div>
                         </td>
